@@ -1,0 +1,432 @@
+function setup() {
+createCanvas(600, 600);
+noLoop();
+}
+
+let cellSize = 20;
+
+
+function draw() {
+push();
+map1(); 
+map1_vertex();
+pop();
+}
+
+function map1() {
+translate(80,80);
+background(0);
+
+for (let i = 0; i < map_level1.length; i++) {
+  for (let j = 0; j < map_level1[i].length; j++) {
+    if (map_level1[i][j] == 1) {
+        fill(0);
+        strokeWeight(2);
+        stroke(0,0,255);
+        rect(j * cellSize, 
+             i * cellSize, 
+             cellSize, 
+             cellSize);
+        
+            }
+        }
+    }
+}
+
+function map1_vertex() {
+beginShape(LINES);
+        stroke(255);
+        vertex(0,0);
+        vertex(cellSize*21,0);
+        vertex(cellSize*21,0);
+        vertex(cellSize*21,cellSize*8);
+        vertex(cellSize*21,cellSize*8);
+        vertex(cellSize*17,cellSize*8);
+        vertex(cellSize*17,cellSize*8);
+        vertex(cellSize*17,cellSize*9);
+        vertex(cellSize*17,cellSize*9);
+        vertex(cellSize*21,cellSize*9);
+        vertex(cellSize*21,cellSize*9);
+        vertex(cellSize*21,cellSize*12);
+        vertex(cellSize*21,cellSize*12);
+        vertex(cellSize*17,cellSize*12);
+        vertex(cellSize*17,cellSize*12);
+        vertex(cellSize*17,cellSize*14);
+        vertex(cellSize*17,cellSize*14);
+        vertex(cellSize*21,cellSize*14);
+        vertex(cellSize*21,cellSize*14);
+        vertex(cellSize*21,cellSize*23);
+        vertex(cellSize*21,cellSize*23);
+        vertex(0,cellSize*23);
+        vertex(0,cellSize*23);
+        vertex(0,cellSize*14);
+        vertex(0,cellSize*14);
+        vertex(cellSize*4,cellSize*14);
+        vertex(cellSize*4,cellSize*14);
+        vertex(cellSize*4,cellSize*12);
+        vertex(cellSize*4,cellSize*12);
+        vertex(0,cellSize*12);
+        vertex(0,cellSize*12);
+        vertex(0,cellSize*9);
+        vertex(0,cellSize*9);
+        vertex(cellSize*4,cellSize*9);
+        vertex(cellSize*4,cellSize*9);
+        vertex(cellSize*4,cellSize*8);
+        vertex(cellSize*4,cellSize*8);
+        vertex(0,cellSize*8);
+        vertex(0,cellSize*8);
+        vertex(0,0);
+
+        vertex(cellSize,cellSize);
+        vertex(cellSize*10,cellSize);
+        vertex(cellSize*10,cellSize);
+        vertex(cellSize*10,cellSize*4);
+        vertex(cellSize*10,cellSize*4);
+        vertex(cellSize*11,cellSize*4);
+        vertex(cellSize*11,cellSize*4);
+        vertex(cellSize*11,cellSize);
+        vertex(cellSize*11,cellSize);
+        vertex(cellSize*20,cellSize);
+        vertex(cellSize*20,cellSize);
+        vertex(cellSize*20,cellSize*7);
+        vertex(cellSize*20,cellSize*7);
+        vertex(cellSize*16,cellSize*7);
+        vertex(cellSize*16,cellSize*7);
+        vertex(cellSize*16,cellSize*10);
+        vertex(cellSize*16,cellSize*10);
+        vertex(cellSize*20,cellSize*10);
+        vertex(cellSize*20,cellSize*10);
+        vertex(cellSize*20,cellSize*11);
+        vertex(cellSize*20,cellSize*11);
+        vertex(cellSize*16,cellSize*11);
+        vertex(cellSize*16,cellSize*11);
+        vertex(cellSize*16,cellSize*15);
+        vertex(cellSize*16,cellSize*15);
+        vertex(cellSize*20,cellSize*15);
+        vertex(cellSize*20,cellSize*15);
+        vertex(cellSize*20,cellSize*18);
+        vertex(cellSize*20,cellSize*18);
+        vertex(cellSize*19,cellSize*18);
+        vertex(cellSize*19,cellSize*18);
+        vertex(cellSize*19,cellSize*19);
+        vertex(cellSize*19,cellSize*19);
+        vertex(cellSize*20,cellSize*19);
+        vertex(cellSize*20,cellSize*19);
+        vertex(cellSize*20,cellSize*22);
+        vertex(cellSize*20,cellSize*22);
+        vertex(cellSize,cellSize*22);
+        vertex(cellSize,cellSize*22);
+        vertex(cellSize,cellSize*19);
+        vertex(cellSize,cellSize*19);
+        vertex(cellSize*2,cellSize*19);
+        vertex(cellSize*2,cellSize*19);
+        vertex(cellSize*2,cellSize*18);
+        vertex(cellSize*2,cellSize*18);
+        vertex(cellSize,cellSize*18);
+        vertex(cellSize,cellSize*18);
+        vertex(cellSize,cellSize*15);
+        vertex(cellSize,cellSize*15);
+        vertex(cellSize*5,cellSize*15);
+        vertex(cellSize*5,cellSize*15);
+        vertex(cellSize*5,cellSize*11);
+        vertex(cellSize*5,cellSize*11);
+        vertex(cellSize,cellSize*11);
+        vertex(cellSize,cellSize*11);
+        vertex(cellSize,cellSize*10);
+        vertex(cellSize,cellSize*10);
+        vertex(cellSize*5,cellSize*10);
+        vertex(cellSize*5,cellSize*10);
+        vertex(cellSize*5,cellSize*7);
+        vertex(cellSize*5,cellSize*7);
+        vertex(cellSize,cellSize*7);
+        vertex(cellSize,cellSize*7);
+        vertex(cellSize,cellSize);
+     
+        vertex(cellSize*2,cellSize*2);
+        vertex(cellSize*5,cellSize*2);
+        vertex(cellSize*5,cellSize*2);
+        vertex(cellSize*5,cellSize*4);
+        vertex(cellSize*5,cellSize*4);
+        vertex(cellSize*2,cellSize*4);
+        vertex(cellSize*2,cellSize*4);
+        vertex(cellSize*2,cellSize*2);
+        vertex(cellSize*6,cellSize*2);
+        
+        vertex(cellSize*9,cellSize*2);
+        vertex(cellSize*9,cellSize*2);
+        vertex(cellSize*9,cellSize*4);
+        vertex(cellSize*9,cellSize*4);
+        vertex(cellSize*6,cellSize*4);
+        vertex(cellSize*6,cellSize*4);
+        vertex(cellSize*6,cellSize*2);
+      
+        vertex(cellSize*12,cellSize*2);
+        vertex(cellSize*15,cellSize*2);
+        vertex(cellSize*15,cellSize*2);
+        vertex(cellSize*15,cellSize*4);
+        vertex(cellSize*15,cellSize*4);
+        vertex(cellSize*12,cellSize*4);
+        vertex(cellSize*12,cellSize*4);
+        vertex(cellSize*12,cellSize*2);
+      
+        vertex(cellSize*16,cellSize*2);
+        vertex(cellSize*19,cellSize*2);
+        vertex(cellSize*19,cellSize*2);
+        vertex(cellSize*19,cellSize*4);
+        vertex(cellSize*19,cellSize*4);
+        vertex(cellSize*16,cellSize*4);
+        vertex(cellSize*16,cellSize*4);
+        vertex(cellSize*16,cellSize*2);
+      
+        vertex(cellSize*2,cellSize*5);
+        vertex(cellSize*5,cellSize*5);
+        vertex(cellSize*5,cellSize*5);
+        vertex(cellSize*5,cellSize*6);
+        vertex(cellSize*5,cellSize*6);
+        vertex(cellSize*2,cellSize*6);
+        vertex(cellSize*2,cellSize*6);
+        vertex(cellSize*2,cellSize*5);
+       
+        vertex(cellSize*6,cellSize*5);
+        vertex(cellSize*7,cellSize*5);
+        vertex(cellSize*7,cellSize*5);
+        vertex(cellSize*7,cellSize*7);
+        vertex(cellSize*7,cellSize*7);
+        vertex(cellSize*9,cellSize*7);
+        vertex(cellSize*9,cellSize*7);
+        vertex(cellSize*9,cellSize*8);
+        vertex(cellSize*9,cellSize*8);
+        vertex(cellSize*7,cellSize*8);
+        vertex(cellSize*7,cellSize*8);
+        vertex(cellSize*7,cellSize*10);
+        vertex(cellSize*7,cellSize*10);
+        vertex(cellSize*6,cellSize*10);
+        vertex(cellSize*6,cellSize*10);
+        vertex(cellSize*6,cellSize*5);
+      
+        vertex(cellSize*8,cellSize*5);
+        vertex(cellSize*13,cellSize*5);
+        vertex(cellSize*13,cellSize*5);
+        vertex(cellSize*13,cellSize*6);
+        vertex(cellSize*13,cellSize*6);
+        vertex(cellSize*11,cellSize*6);
+        vertex(cellSize*11,cellSize*6);
+        vertex(cellSize*11,cellSize*8);
+        vertex(cellSize*11,cellSize*8);
+        vertex(cellSize*10,cellSize*8);
+        vertex(cellSize*10,cellSize*8);
+        vertex(cellSize*10,cellSize*6);
+        vertex(cellSize*10,cellSize*6);
+        vertex(cellSize*8,cellSize*6);
+        vertex(cellSize*8,cellSize*6);
+        vertex(cellSize*8,cellSize*5);
+        
+        vertex(cellSize*14,cellSize*5);
+        vertex(cellSize*15,cellSize*5);
+        vertex(cellSize*15,cellSize*5);
+        vertex(cellSize*15,cellSize*10);
+        vertex(cellSize*15,cellSize*10);
+        vertex(cellSize*14,cellSize*10);
+        vertex(cellSize*14,cellSize*10);
+        vertex(cellSize*14,cellSize*8);
+        vertex(cellSize*14,cellSize*8);
+        vertex(cellSize*12,cellSize*8);
+        vertex(cellSize*12,cellSize*8);
+        vertex(cellSize*12,cellSize*7);
+        vertex(cellSize*12,cellSize*7);
+        vertex(cellSize*14,cellSize*7);
+        vertex(cellSize*14,cellSize*7);
+        vertex(cellSize*14,cellSize*5);
+        
+        vertex(cellSize*16,cellSize*5);
+        vertex(cellSize*19,cellSize*5);
+        vertex(cellSize*19,cellSize*5);
+        vertex(cellSize*19,cellSize*6);
+        vertex(cellSize*19,cellSize*6);
+        vertex(cellSize*16,cellSize*6);
+        vertex(cellSize*16,cellSize*6);
+        vertex(cellSize*16,cellSize*5);
+      
+        vertex(cellSize*8,cellSize*9);
+        vertex(cellSize*10,cellSize*9);
+        vertex(cellSize*10,cellSize*9);
+        vertex(cellSize*10,cellSize*10);
+        vertex(cellSize*10,cellSize*10);
+        vertex(cellSize*9,cellSize*10);
+        vertex(cellSize*9,cellSize*10);
+        vertex(cellSize*9,cellSize*12);
+        vertex(cellSize*9,cellSize*12);
+        vertex(cellSize*12,cellSize*12);
+        vertex(cellSize*12,cellSize*12);
+        vertex(cellSize*12,cellSize*10);
+        vertex(cellSize*12,cellSize*10);
+        vertex(cellSize*11,cellSize*10);
+        vertex(cellSize*11,cellSize*10);
+        vertex(cellSize*11,cellSize*9);
+        vertex(cellSize*11,cellSize*9);
+        vertex(cellSize*13,cellSize*9);
+        vertex(cellSize*13,cellSize*9);
+        vertex(cellSize*13,cellSize*13);
+        vertex(cellSize*13,cellSize*13);
+        vertex(cellSize*8,cellSize*13);  
+        vertex(cellSize*8,cellSize*13);
+        vertex(cellSize*8,cellSize*9);
+        
+        vertex(cellSize*6,cellSize*11);
+        vertex(cellSize*7,cellSize*11);
+        vertex(cellSize*7,cellSize*11);
+        vertex(cellSize*7,cellSize*14);
+        vertex(cellSize*7,cellSize*14);
+        vertex(cellSize*6,cellSize*14);
+        vertex(cellSize*6,cellSize*14);
+        vertex(cellSize*6,cellSize*11);
+      
+        vertex(cellSize*8,cellSize*14);
+        vertex(cellSize*13,cellSize*14);
+        vertex(cellSize*13,cellSize*14);
+        vertex(cellSize*13,cellSize*15);
+        vertex(cellSize*13,cellSize*15);
+        vertex(cellSize*11,cellSize*15);
+        vertex(cellSize*11,cellSize*15);
+        vertex(cellSize*11,cellSize*17);
+        vertex(cellSize*11,cellSize*17);
+        vertex(cellSize*10,cellSize*17);
+        vertex(cellSize*10,cellSize*17);
+        vertex(cellSize*10,cellSize*15);
+        vertex(cellSize*10,cellSize*15);
+        vertex(cellSize*8,cellSize*15);
+        vertex(cellSize*8,cellSize*15);
+        vertex(cellSize*8,cellSize*14);
+      
+        vertex(cellSize*14,cellSize*11);
+        vertex(cellSize*15,cellSize*11);
+        vertex(cellSize*15,cellSize*11);
+        vertex(cellSize*15,cellSize*14);  
+        vertex(cellSize*15,cellSize*14);
+        vertex(cellSize*14,cellSize*14);
+        vertex(cellSize*14,cellSize*14);
+        vertex(cellSize*14,cellSize*11);
+      
+        vertex(cellSize*2,cellSize*16);
+        vertex(cellSize*2,cellSize*17);
+        vertex(cellSize*2,cellSize*17);
+        vertex(cellSize*4,cellSize*17);
+        vertex(cellSize*4,cellSize*17);
+        vertex(cellSize*4,cellSize*19);  
+        vertex(cellSize*4,cellSize*19);
+        vertex(cellSize*5,cellSize*19);
+        vertex(cellSize*5,cellSize*19);
+        vertex(cellSize*5,cellSize*16);
+        vertex(cellSize*5,cellSize*16);
+        vertex(cellSize*2,cellSize*16);
+      
+        vertex(cellSize*6,cellSize*16);
+        vertex(cellSize*9,cellSize*16);
+        vertex(cellSize*9,cellSize*16);
+        vertex(cellSize*9,cellSize*17);  
+        vertex(cellSize*9,cellSize*17);
+        vertex(cellSize*6,cellSize*17);
+        vertex(cellSize*6,cellSize*17);
+        vertex(cellSize*6,cellSize*16);
+      
+        vertex(cellSize*12,cellSize*16);  
+        vertex(cellSize*15,cellSize*16);
+        vertex(cellSize*15,cellSize*16);
+        vertex(cellSize*15,cellSize*17);  
+        vertex(cellSize*15,cellSize*17);
+        vertex(cellSize*12,cellSize*17);
+        vertex(cellSize*12,cellSize*17);
+        vertex(cellSize*12,cellSize*16);
+      
+        vertex(cellSize*16,cellSize*16);  
+        vertex(cellSize*19,cellSize*16);
+        vertex(cellSize*19,cellSize*16);
+        vertex(cellSize*19,cellSize*17);
+        vertex(cellSize*19,cellSize*17);
+        vertex(cellSize*17,cellSize*17);
+        vertex(cellSize*17,cellSize*17);
+        vertex(cellSize*17,cellSize*19);
+        vertex(cellSize*17,cellSize*19);
+        vertex(cellSize*16,cellSize*19);
+        vertex(cellSize*16,cellSize*19);
+        vertex(cellSize*16,cellSize*16);
+      
+        vertex(cellSize*2,cellSize*20);
+        vertex(cellSize*6,cellSize*20);
+        vertex(cellSize*6,cellSize*20);
+        vertex(cellSize*6,cellSize*18);
+        vertex(cellSize*6,cellSize*18);
+        vertex(cellSize*7,cellSize*18);
+        vertex(cellSize*7,cellSize*18);
+        vertex(cellSize*7,cellSize*20);
+        vertex(cellSize*7,cellSize*20);
+        vertex(cellSize*9,cellSize*20);
+        vertex(cellSize*9,cellSize*20);
+        vertex(cellSize*9,cellSize*21);
+        vertex(cellSize*9,cellSize*21);
+        vertex(cellSize*2,cellSize*21);
+        vertex(cellSize*2,cellSize*21);
+        vertex(cellSize*2,cellSize*20);
+      
+        vertex(cellSize*8,cellSize*18);  
+        vertex(cellSize*13,cellSize*18);
+        vertex(cellSize*13,cellSize*18);
+        vertex(cellSize*13,cellSize*19);
+        vertex(cellSize*13,cellSize*19);
+        vertex(cellSize*11,cellSize*19);
+        vertex(cellSize*11,cellSize*19);
+        vertex(cellSize*11,cellSize*21);
+        vertex(cellSize*11,cellSize*21);
+        vertex(cellSize*10,cellSize*21);
+        vertex(cellSize*10,cellSize*21);
+        vertex(cellSize*10,cellSize*19);
+        vertex(cellSize*10,cellSize*19);
+        vertex(cellSize*8,cellSize*19);
+        vertex(cellSize*8,cellSize*19);
+        vertex(cellSize*8,cellSize*18);
+      
+        vertex(cellSize*12,cellSize*20);
+        vertex(cellSize*14,cellSize*20);
+        vertex(cellSize*14,cellSize*20);
+        vertex(cellSize*14,cellSize*18);
+        vertex(cellSize*14,cellSize*18);
+        vertex(cellSize*15,cellSize*18);
+        vertex(cellSize*15,cellSize*18);
+        vertex(cellSize*15,cellSize*20);
+        vertex(cellSize*15,cellSize*20);
+        vertex(cellSize*19,cellSize*20);
+        vertex(cellSize*19,cellSize*20);
+        vertex(cellSize*19,cellSize*21);
+        vertex(cellSize*19,cellSize*21);
+        vertex(cellSize*12,cellSize*21);  
+        vertex(cellSize*12,cellSize*21);
+        vertex(cellSize*12,cellSize*20);
+            
+        endShape(CLOSE);
+}
+
+let map_level1 = [
+  [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1, 1],
+  [1,0,0,0,0, 0,0,0,0,0, 1,0,0,0,0, 0,0,0,0,0, 1],
+  [1,0,1,1,1, 0,1,1,1,0, 1,0,1,1,1, 0,1,1,1,0, 1],
+  [1,0,1,1,1, 0,1,1,1,0, 1,0,1,1,1, 0,1,1,1,0, 1],
+  [1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 1],
+  [1,0,1,1,1, 0,1,0,1,1, 1,1,1,0,1, 0,1,1,1,0, 1],
+  [1,0,0,0,0, 0,1,0,0,0, 1,0,0,0,1, 0,0,0,0,0, 1],
+  [1,1,1,1,1, 0,1,1,1,0, 1,0,1,1,1, 0,1,1,1,1, 1],
+  [0,0,0,0,1, 0,1,0,0,0, 0,0,0,0,1, 0,1,0,0,0, 0],
+  [1,1,1,1,1, 0,1,0,1,1, 0,1,1,0,1, 0,1,1,1,1, 1],
+  [1,0,0,0,0, 0,0,0,1,0, 0,0,1,0,0, 0,0,0,0,0, 1],
+  [1,1,1,1,1, 0,1,0,1,0, 0,0,1,0,1, 0,1,1,1,1, 1],
+  [0,0,0,0,1, 0,1,0,1,1, 1,1,1,0,1, 0,1,0,0,0, 0],
+  [0,0,0,0,1, 0,1,0,0,0, 0,0,0,0,1, 0,1,0,0,0, 0],
+  [1,1,1,1,1, 0,0,0,1,1, 1,1,1,0,0, 0,1,1,1,1, 1],
+  [1,0,0,0,0, 0,0,0,0,0, 1,0,0,0,0, 0,0,0,0,0, 1],
+  [1,0,1,1,1, 0,1,1,1,0, 1,0,1,1,1, 0,1,1,1,0, 1],
+  [1,0,0,0,1, 0,0,0,0,0, 0,0,0,0,0, 0,1,0,0,0, 1],
+  [1,1,0,0,1, 0,1,0,1,1, 1,1,1,0,1, 0,1,0,0,1, 1],
+  [1,0,0,0,0, 0,1,0,0,0, 1,0,0,0,1, 0,0,0,0,0, 1],
+  [1,0,1,1,1, 1,1,1,1,0, 1,0,1,1,1, 1,1,1,1,0, 1],
+  [1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 1],
+  [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1, 1],
+];
