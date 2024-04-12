@@ -1,0 +1,54 @@
+let rg = 'red';
+let bg = 'skyblue'
+let og = 'orange'
+let pg = 'hotpink'
+
+
+function setup() {
+  createCanvas(20, 20);
+}
+
+function draw() {
+  background(220);
+  noStroke();
+  ghost(0,0,rg);
+  packman_1(0,0);
+  //packman_2(0,0);
+}
+function packman_1(x,y){
+  translate(x,y);
+  fill(255, 255, 0);
+  let biteSize = PI / 16;
+  let startAngle = biteSize * sin(PI/2) + biteSize*2;
+  let endAngle = TWO_PI - startAngle;
+  arc(-180, -180, 30, 30, startAngle, endAngle, PIE);
+}
+function packman_2(x,y){
+  translate(x,y);
+  fill(255, 255, 0);
+  circle(-180,-180,30);
+}
+function ghost(x,y,c){
+  translate(10, 10);
+  scale(0.05);
+  fill(c);
+  push();
+  rect(-140,-180,280,300,360,360,0,0);
+  beginShape();
+  vertex(-140,100);
+  bezierVertex(-140,190,-125,180,-115,160);
+  bezierVertex(-90,110,-80,130,-70,150);
+  bezierVertex(-50,190,-40,180,-30,160);
+  bezierVertex(0,110,10,130,20,150);
+  bezierVertex(40,190,50,180,60,160);
+  bezierVertex(90,110,100,130,110,150);
+  bezierVertex(135,190,140,180,140,100);
+  endShape();
+  pop();
+  fill(255,255,255);
+  circle(90,-60,70);
+  circle(-30,-60,70);
+  fill(6,64,138);
+  circle(105,-60,32);
+  circle(-15,-60,32);
+}
