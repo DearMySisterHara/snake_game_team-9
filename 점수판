@@ -1,0 +1,83 @@
+let blinkTimerScoreValue = 0;
+let blinkDuration = 30;
+
+function setup() {
+
+  createCanvas(600, 640);
+
+  background(51);
+
+function draw() {
+
+  background(51);
+
+  scoreboard();
+
+  if (s.score % 100 === 0) {
+    if (blinkTimerScoreValue < blinkDuration / 2) {
+      fill(255);
+    } else {
+      fill(255,255,0);
+      textSize(21);
+    }
+    if (blinkTimerScoreValue === blinkDuration) {
+      blinkTimerScoreValue = 0; // Reset blink timer after 1 second
+    }
+    blinkTimerScoreValue++;
+  } else {
+    fill(255);
+  }
+  text(s.score, 360, 625);
+}//노란색으로 깜빡거리는 효
+  
+
+
+
+ 
+
+function scoreboard() {
+
+  fill(0);
+  rect(0, 600, 600, 40);
+
+  fill(255,255,255);
+  textFont('Courier New');
+
+  textSize(19);
+  text("Score: ", 280, 625);
+  text("Highscore: ", 420, 625)
+  text(s.highscore, 530, 625)
+
+}// 점수판
+
+this.eat = function(pos) {
+
+    let d = dist(this.x, this.y, pos.x, pos.y);
+
+    if (d < 1) {
+
+      this.total++;
+
+      this.score +=10;
+
+      
+
+      if (this.score > this.highscore) {
+
+        this.highscore = this.score;
+
+      }
+
+      text(this.highscore, 540, 625);
+
+      return true;
+
+    } else {
+
+      return false;
+
+    }
+
+  } //점수 10점씩
+
+ 
