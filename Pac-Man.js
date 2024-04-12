@@ -96,8 +96,11 @@ function draw() {
   pMan.update(mapData);
   
   m1.show();
+  m1.update(mapData);
   m2.show();
+  m2.update(mapData);
   m3.show();
+  m3.update(mapData);
 }
 
 function keyPressed() {
