@@ -106,31 +106,18 @@ function draw() {
 function keyPressed() {
   if (keyCode === UP_ARROW){
       pMan.dir(0, -1);
+      pMan.pacDir = PI*1.5;
   }else if (keyCode === DOWN_ARROW) {
       pMan.dir(0, 1);
+      pMan.pacDir = PI*0.5;
   }else if (keyCode === RIGHT_ARROW) {
       pMan.dir (1, 0);
+      pMan.pacDir = PI;
   }else if (keyCode === LEFT_ARROW) {
       pMan.dir (-1, 0);
+      pMan.pacDir = 0;
   }
 }
- 
-function pickLocation() { //랜덤한 위치를 지정해주는 클래스
-  let cols = floor(playfield/scl);
-  let rows = floor(playfield/scl);
-  food = createVector(floor(random(cols)), floor(random(rows)));
-  food.mult(scl);
- 
-  // Check the food isn't appearing inside the tail
- 
-  for (let i = 0; i < s.tail.length; i++) {
-    let pos = s.tail[i];
-    let d = dist(food.x, food.y, pos.x, pos.y);
-    if (d < 1) {
-      pickLocation();
-    }
-  }
-} 
 
 function obj(type) {
   // 객체의 상태에 관한 필드
@@ -141,6 +128,7 @@ function obj(type) {
   this.yspeed = 0; //y 방향 이동속도
   this.type = type;
   this.pacCount = 0;
+  this.pacDir = PI;
   
   // 점수관련 필드
   
@@ -192,30 +180,30 @@ function obj(type) {
   //객체를 그리는 메소드
   this.show = function(){
     if (this.type) { //팩맨 그림
-      if (this.pacCount <= 2) {        
+      if (this.pacCount <= 3) {        
         push();
-        fill(255,255,0);
-        rect(this.x, this.y, scl, scl);
+        fill(255, 255, 0);
+        arc(this.x + scl/2, this.y + scl/2, scl, scl, -PI * 0.8 - this.pacDir, PI * 0.8 - this.pacDir, PIE);
         pop();
         this.pacCount++;
       } else {
         push();
-        fill(255,0,0);
-        rect(this.x, this.y, scl, scl);
+        fill(255, 255, 0);
+        circle(this.x + scl/2, this.y + scl/2, scl);
         pop();
         this.pacCount++;
-        if (this.pacCount <= 4) this.pacCount = 0;
+        if (this.pacCount >= 6) this.pacCount = 0;
       }
     } else { //몬스터 그림
       push();
       fill(255);
-      rect(this.x, this.y, scl, scl);
+      ghost(this.x + scl/2,this.y + scl/2);
       pop();
     }
   } 
 }
 
-//맵에 따른 벽을 생성하는 함수
+//맵 데이터를 받아서 벽을 생성함
 function wall(mapData) {
   push();
   noStroke();
@@ -226,4 +214,86 @@ function wall(mapData) {
     }
   }
   pop();
+}
+
+function ghost(x,y){
+  push();
+  translate(x, y);
+  scale(0.05);
+  
+  rect(-140,-180,280,300,360,360,0,0);
+  beginShape();
+  vertex(-140,100);
+  bezierVertex(-140,190,-125,180,-115,160);
+  bezierVertex(-90,110,-80,130,-70,150);
+  bezierVertex(-50,190,-40,180,-30,160);
+  bezierVertex(0,110,10,130,20,150);
+  bezierVertex(40,190,50,180,60,160);
+  bezierVertex(90,110,100,130,110,150);
+  bezierVertex(135,190,140,180,140,100);
+  endShape();
+
+  fill(255,255,255);
+  circle(90,-60,70);
+  circle(-30,-60,70);
+  
+  fill(6,64,138);
+  circle(105,-60,32);
+  circle(-15,-60,32);
+  pop();
+}
+let blinkTimerScoreValue = 0;
+let blinkDuration = 30;
+
+function hum() {
+
+  background(51);
+
+  scoreboard();
+
+  if (s.score % 100 === 0) {
+    if (blinkTimerScoreValue < blinkDuration / 2) {
+      fill(255);
+    } else {
+      fill(255,255,0);
+      textSize(21);
+    }
+    if (blinkTimerScoreValue === blinkDuration) {
+      blinkTimerScoreValue = 0; // Reset blink timer after 1 second
+    }
+    blinkTimerScoreValue++;
+  } else {
+    fill(255);
+  }
+  text(s.score, 360, 625);
+}//노란색으로 깜빡거리는 효과
+
+function scoreboard() {
+
+  fill(0);
+  rect(0, 600, 600, 40);
+
+  fill(255,255,255);
+  textFont('Courier New');
+
+  textSize(19);
+  text("Score: ", 280, 625);
+  text("Highscore: ", 420, 625)
+  text(s.highscore, 530, 625)
+
+}// 점수판
+
+this.eat = function(pos) {
+    let d = dist(this.x, this.y, pos.x, pos.y);
+  
+    if (d < 1) {
+      this.total++;
+      this.score +=10; //10점씩
+      if (this.score > this.highscore) this.highscore = this.score;
+
+      text(this.highscore, 540, 625);
+      return true;
+    } else {
+      return false;
+    }
 }
