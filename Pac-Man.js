@@ -1,10 +1,16 @@
 //전역 변수
 let pMan; //팩멘
-let m1, m2, m3; //몬스터 1, 2, 3
+let m1, m2, m3, m4; //몬스터 1, 2, 3
 let scl = 20; //스케일
 let playfield = 600; //맵 크기
+let newgame;
+let highscore = 0;
+
 let mapData; //맵 데이터
-let mNum = 0; //현재 몬스터의 수
+let pointMap = []; //점수 
+for (let i = 0; i < 30; i++) {
+  pointMap[i] = new Array(30).fill(0); // 각 행을 0으로 초기화
+}
 
 // 맵 
 let map_level1 = [
@@ -39,61 +45,25 @@ let map_level1 = [
   [1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1],
   [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1,1, 1,1,1,1, 1,1,1,1,1, 1,1,1,1,1],
 ];
-let map_level2 = [
-  [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,0, 0,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1],
-  [1,0,0,0,0, 0,0,0,0,0, 0,0,0,1,0, 0,1,0,0,0, 0,0,0,0,0, 0,0,0,0,1],
-  [1,0,1,1,1, 1,0,0,1,1, 1,1,0,1,0, 0,1,0,1,1, 1,1,0,0,1, 1,1,1,0,1],
-  [1,0,1,0,0, 0,0,0,0,0, 0,1,0,1,0, 0,1,0,1,0, 0,0,0,0,0, 0,0,1,0,1],
-  [1,0,1,0,0, 0,1,1,0,0, 0,1,0,1,0, 0,1,0,1,0, 0,0,1,1,0, 0,0,1,0,1], 
-  [1,0,1,0,0, 0,0,0,0,0, 0,1,0,1,0, 0,1,0,1,0, 0,0,0,0,0, 0,0,1,0,1],
-  [1,0,0,0,1, 0,1,1,0,1, 0,0,0,1,0, 0,1,0,0,0, 1,0,1,1,0, 1,0,0,0,1],
-  [1,0,0,0,1, 0,1,1,0,1, 0,0,0,1,1, 1,1,0,0,0, 1,0,1,1,0, 1,0,0,0,1],
-  [1,0,1,0,0, 0,0,0,0,0, 0,1,0,0,0, 0,0,0,1,0, 0,0,0,0,0, 0,0,1,0,1],
-  [1,0,1,0,0, 0,1,1,0,0, 0,1,0,0,1, 1,0,0,1,0, 0,0,1,1,0, 0,0,1,0,1], 
-  [1,0,1,0,0, 0,0,0,0,0, 0,1,0,0,1, 1,0,0,1,0, 0,0,0,0,0, 0,0,1,0,1],
-  [1,0,1,1,1, 1,0,0,1,1, 1,1,0,0,1, 1,0,0,1,1, 1,1,0,0,1, 1,1,1,0,1],
-  [1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1],
-  [1,1,1,1,1, 1,1,1,0,0, 0,0,0,1,1, 1,1,0,0,0, 0,0,1,1,1, 1,1,1,1,1],
-  [0,0,0,0,0, 0,0,1,0,1, 1,1,0,1,0, 0,1,0,1,1, 1,0,1,0,0, 0,0,0,0,0], 
-  [0,0,0,0,0, 0,0,1,0,1, 1,1,0,1,0, 0,1,0,1,1, 1,0,1,0,0, 0,0,0,0,0],
-  [1,1,1,1,1, 1,1,1,0,0, 0,0,0,1,1, 1,1,0,0,0, 0,0,1,1,1, 1,1,1,1,1],
-  [1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1],
-  [1,0,1,1,1, 1,0,0,1,1, 1,1,0,0,1, 1,0,0,1,1, 1,1,0,0,1, 1,1,1,0,1],
-  [1,0,1,0,0, 0,0,0,0,0, 0,1,0,0,1, 1,0,0,1,0, 0,0,0,0,0, 0,0,1,0,1],
-  [1,0,1,0,0, 0,1,1,0,0, 0,1,0,0,1, 1,0,0,1,0, 0,0,1,1,0, 0,0,1,0,1],
-  [1,0,1,0,0, 0,0,0,0,0, 0,1,0,0,0, 0,0,0,1,0, 0,0,0,0,0, 0,0,1,0,1],
-  [1,0,0,0,1, 0,1,1,0,1, 0,0,0,1,1, 1,1,0,0,0, 1,0,1,1,0, 1,0,0,0,1],
-  [1,0,0,0,1, 0,1,1,0,1, 0,0,0,1,0, 0,1,0,0,0, 1,0,1,1,0, 1,0,0,0,1],
-  [1,0,1,0,0, 0,0,0,0,0, 0,1,0,1,0, 0,1,0,1,0, 0,0,0,0,0, 0,0,1,0,1],
-  [1,0,1,0,0, 0,1,1,0,0, 0,1,0,1,0, 0,1,0,1,0, 0,0,1,1,0, 0,0,1,0,1],
-  [1,0,1,0,0, 0,0,0,0,0, 0,1,0,1,0, 0,1,0,1,0, 0,0,0,0,0, 0,0,1,0,1],
-  [1,0,1,1,1, 1,0,0,1,1, 1,1,0,1,0, 0,1,0,1,1, 1,1,0,0,1, 1,1,1,0,1],
-  [1,0,0,0,0, 0,0,0,0,0, 0,0,0,1,0, 0,1,0,0,0, 0,0,0,0,0, 0,0,0,0,1],
-  [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,0, 0,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1],
-];
 
 function setup() {
   createCanvas(playfield, playfield + 40);
   background(51);
   frameRate(8);
   
-  //객체생성 팩맨이면 true, 아니면 false
-  pMan = new obj(true);
-  m1 = new obj(false);
-  m2 = new obj(false);
-  m3 = new obj(false);
-  
-  //기본 맵 1로 설정, 맵 그리기
-  mapData = map_level1;
-  wall(mapData);
+  newGame();
 }
 
 function draw() {
   background(20);
+  if(newgame) newGame();
+  
   wall(mapData);
+  drawPointMap(pointMap);
   
   pMan.show();
   pMan.update(mapData);
+  pointEat(pointMap);
   
   m1.show();
   m1.update(mapData);
@@ -101,8 +71,39 @@ function draw() {
   m2.update(mapData);
   m3.show();
   m3.update(mapData);
+  m4.show();
+  m4.update(mapData);
+  
+  pMan.death(m1);
+  pMan.death(m2);
+  pMan.death(m3);
+  pMan.death(m4);
   
   scoreboard();
+}
+
+function newGame() {
+  pMan = new obj(true);
+  m1 = new obj(false);
+  m2 = new obj(false);
+  m3 = new obj(false);
+  m4 = new obj(false);
+  
+  m1.x = 28 * scl;
+  m1.y = 1 * scl;
+  m2.x = 1 * scl;
+  m2.y = 28 * scl;
+  m3.x = 28 * scl;
+  m3.y = 28 * scl;
+  m4.x = 1 * scl;
+  m4.y = 1 * scl;
+  
+  //기본 맵 1로 설정, 맵 그리기 점수 맵 생성
+  mapData = map_level1;
+  wall(mapData);
+  createPointMap(mapData);
+  drawPointMap(pointMap);
+  newgame = 0;
 }
 
 function keyPressed() {
@@ -124,19 +125,16 @@ function keyPressed() {
 function obj(type) {
   // 객체의 상태에 관한 필드
   
-  this.x = 20; //객체의 x 위치
-  this.y = 20; //객체의 y 위치
-  this.xspeed = 1; //x 방향 이동속도
+  this.x = 220; //객체의 x 위치
+  this.y = 220; //객체의 y 위치
+  this.xspeed = 0; //x 방향 이동속도
   this.yspeed = 0; //y 방향 이동속도
   this.type = type;
   this.pacCount = 0;
   this.pacDir = PI;
   
-  // 점수관련 필드
-  
-  this.total = 0;
-  this.score = 1;
-  this.highscore = 1;
+  // 점수 필드
+  this.score = 0;
 
   //객체의 이동방향을 정하는 메소드
   this.dir = function(x,y) {
@@ -165,7 +163,9 @@ function obj(type) {
   this.death = function(monster) {
     let d = dist(this.x, this.y, monster.x, monster.y);
     if (d < 1) {
+      if (highscore < this.score) highscore = this.score;      
       this.score = 0;
+      newgame = 1;
     }
   }
  
@@ -225,8 +225,8 @@ function wall(mapData) {
   push();
   noStroke();
   fill(70,0,255);
-  for (i = 0; i < playfield/scl; i++) {
-    for (j = 0; j < playfield/scl; j++) {
+  for (let i = 0; i < playfield/scl; i++) {
+    for (let j = 0; j < playfield/scl; j++) {
       if (mapData[i][j]) rect(i*scl, j*scl, scl, scl);
     }
   }
@@ -260,32 +260,39 @@ function ghost(x,y){
   pop();
 }
 
-
-let blinkTimerScoreValue = 0;
-let blinkDuration = 30;
-
-function hum() {
-
-  background(51);
-
-  scoreboard();
-
-  if (s.score % 100 === 0) {
-    if (blinkTimerScoreValue < blinkDuration / 2) {
-      fill(255);
-    } else {
-      fill(255,255,0);
-      textSize(21);
+function createPointMap(mapData) {
+  for (let i = 0; i < playfield/scl; i++) {
+    for (let j = 0; j < playfield/scl; j++) {
+      if (mapData[i][j] == 0) pointMap[i][j] = 1;
     }
-    if (blinkTimerScoreValue === blinkDuration) {
-      blinkTimerScoreValue = 0; // Reset blink timer after 1 second
-    }
-    blinkTimerScoreValue++;
-  } else {
-    fill(255);
   }
-  text(s.score, 360, 625);
-}//노란색으로 깜빡거리는 효과
+}
+
+function drawPointMap(pointMap) {
+  push();
+  noStroke();
+  fill(255,255,0);
+  for (let i = 0; i < playfield/scl; i++) {
+    for (let j = 0; j < playfield/scl; j++) {
+      if (pointMap[i][j]) rect(i*scl + 8, j*scl + 8, 4, 4);
+    }
+  }
+  pop();
+}
+
+function pointEat(pointMap) {
+  for (let i = 0; i < playfield/scl; i++) {
+    for (let j = 0; j < playfield/scl; j++) {
+      if (pointMap[i][j] === 1) {
+        let d = dist(pMan.x, pMan.y, i * scl, j * scl);
+        if (d < 1) {
+          pointMap[i][j] = 0; // 포인트를 제거
+          pMan.score += 10; // 점수 추가
+        }
+      }
+    }
+  }
+}
 
 function scoreboard() {
 
@@ -297,22 +304,7 @@ function scoreboard() {
 
   textSize(19);
   text("Score: ", 280, 625);
+  text(pMan.score.toString(), 350, 625);
   text("Highscore: ", 420, 625)
-  text("최고점수", 530, 625)
-
-}// 점수판
-
-this.eat = function(pos) {
-    let d = dist(this.x, this.y, pos.x, pos.y);
-  
-    if (d < 1) {
-      this.total++;
-      this.score +=10; //10점씩
-      if (this.score > this.highscore) this.highscore = this.score;
-
-      text(this.highscore, 540, 625);
-      return true;
-    } else {
-      return false;
-    }
+  text(highscore.toString(), 535, 625)
 }
