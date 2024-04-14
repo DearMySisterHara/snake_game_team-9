@@ -1,10 +1,10 @@
 //전역 변수
 let pMan; //팩멘
 let m1, m2, m3; //몬스터 1, 2, 3
-let scl = 20; 
-let food;
-let playfield = 600;
-let mapData;
+let scl = 20; //스케일
+let playfield = 600; //맵 크기
+let mapData; //맵 데이터
+let mNum = 0; //현재 몬스터의 수
 
 // 맵 
 let map_level1 = [
@@ -37,7 +37,7 @@ let map_level1 = [
   [1,0,1,1,1, 1,0,1,1,1, 1,0,1,1,1, 1,1,1,0,1, 1,1,1,0,1, 1,1,1,0,1],
   [1,0,1,1,1, 1,0,1,1,1, 1,0,1,1,1, 1,1,1,0,1, 1,1,1,0,1, 1,1,1,0,1],
   [1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1],
-  [1,1,1,1,1, 1,1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1, 1,1,1,1],
+  [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1,1, 1,1,1,1, 1,1,1,1,1, 1,1,1,1,1],
 ];
 let map_level2 = [
   [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,0, 0,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1],
@@ -69,7 +69,7 @@ let map_level2 = [
   [1,0,1,0,0, 0,0,0,0,0, 0,1,0,1,0, 0,1,0,1,0, 0,0,0,0,0, 0,0,1,0,1],
   [1,0,1,1,1, 1,0,0,1,1, 1,1,0,1,0, 0,1,0,1,1, 1,1,0,0,1, 1,1,1,0,1],
   [1,0,0,0,0, 0,0,0,0,0, 0,0,0,1,0, 0,1,0,0,0, 0,0,0,0,0, 0,0,0,0,1],
-  [1,1,1,1,1, 1,1,1,1,1,1, 1,1,1,0, 0,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1],
+  [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,0, 0,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1],
 ];
 
 function setup() {
@@ -101,6 +101,8 @@ function draw() {
   m2.update(mapData);
   m3.show();
   m3.update(mapData);
+  
+  scoreboard();
 }
 
 function keyPressed() {
@@ -124,7 +126,7 @@ function obj(type) {
   
   this.x = 20; //객체의 x 위치
   this.y = 20; //객체의 y 위치
-  this.xspeed = 0; //x 방향 이동속도
+  this.xspeed = 1; //x 방향 이동속도
   this.yspeed = 0; //y 방향 이동속도
   this.type = type;
   this.pacCount = 0;
@@ -163,7 +165,6 @@ function obj(type) {
   this.death = function(monster) {
     let d = dist(this.x, this.y, monster.x, monster.y);
     if (d < 1) {
-      this.total = 0;
       this.score = 0;
     }
   }
@@ -172,8 +173,24 @@ function obj(type) {
   this.update = function(mapData) {
     //객체가 맵에 부딛히지 않을 때, 이동할 수 있게함.  
     if(mapData[this.x / scl + this.xspeed][this.y / scl + this.yspeed] == 0) {
-      this.x += this.xspeed * scl;
-      this.y += this.yspeed * scl;      
+        this.x += this.xspeed * scl;
+        this.y += this.yspeed * scl;
+    }
+    if (!this.type) {
+        switch (Math.floor(Math.random() * 4) + 1) {
+          case 1:
+            if (this.yspeed != 1) this.dir(0, -1);
+            break;
+          case 2:
+            if (this.yspeed != -1) this.dir(0, 1);
+            break;
+          case 3:
+            if (this.xspeed != -1)this.dir(1, 0);
+            break;
+          case 4:
+            if (this.xspeed != 1) this.dir(-1, 0);
+            break;
+        }
     }
   }
   
@@ -242,6 +259,8 @@ function ghost(x,y){
   circle(-15,-60,32);
   pop();
 }
+
+
 let blinkTimerScoreValue = 0;
 let blinkDuration = 30;
 
@@ -279,7 +298,7 @@ function scoreboard() {
   textSize(19);
   text("Score: ", 280, 625);
   text("Highscore: ", 420, 625)
-  text(s.highscore, 530, 625)
+  text("최고점수", 530, 625)
 
 }// 점수판
 
