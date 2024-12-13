@@ -308,3 +308,6 @@ function scoreboard() {
   text("Highscore: ", 420, 625)
   text(highscore.toString(), 535, 625)
 }
+
+
+// 대충 설명을 추가함
